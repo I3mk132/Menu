@@ -1,0 +1,88 @@
+{
+  "app": {
+    "name": "Yerel Sofra"
+  },
+  "nav": {
+    "menu": "Menü",
+    "admin": "Yönetim"
+  },
+  "theme": {
+    "label": "Tema"
+  },
+  "language": {
+    "label": "Dil"
+  },
+  "category": {
+    "all": "Tümü"
+  },
+  "item": {
+    "addToOrder": "Siparişe ekle",
+    "selectSize": "Boyut seçin",
+    "quantity": "Adet",
+    "off": "İNDİRİM",
+    "unavailable": "Şu anda mevcut değil"
+  },
+  "cart": {
+    "title": "Siparişiniz",
+    "empty": "Henüz ürün eklenmedi. Siparişe başlamak için bir yemeğe dokunun.",
+    "subtotal": "Ara toplam",
+    "remove": "Kaldır",
+    "reviewNote": "Siparişinizi vermek için bunu garsona gösterin.",
+    "clear": "Siparişi temizle"
+  },
+  "common": {
+    "loading": "Menü yükleniyor...",
+    "error": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
+    "retry": "Tekrar dene",
+    "close": "Kapat",
+    "save": "Kaydet",
+    "cancel": "Vazgeç",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "add": "Ekle"
+  },
+  "footer": {
+    "tagline": "Taze malzemeler, özenle hazırlanır.",
+    "poweredBy": "Dijital menü şablonu"
+  },
+  "admin": {
+    "dashboard": "Kontrol paneli",
+    "backToMenu": "Genel menüyü görüntüle",
+    "categoriesTab": "Kategoriler",
+    "itemsTab": "Menü öğeleri",
+    "addCategory": "Kategori ekle",
+    "editCategory": "Kategoriyi düzenle",
+    "addItem": "Menü öğesi ekle",
+    "editItem": "Menü öğesini düzenle",
+    "noCategories": "Henüz kategori yok. Başlamak için ilk kategorinizi ekleyin.",
+    "noItems": "Henüz menü öğesi yok. Başlamak için ilk yemeğinizi ekleyin.",
+    "confirmDeleteTitle": "Silinsin mi?",
+    "confirmDeleteCategory": "Bu kategori kalıcı olarak silinecek. İçindeki öğeler otomatik silinmez.",
+    "confirmDeleteItem": "Bu menü öğesi kalıcı olarak silinecek.",
+    "fields": {
+      "nameEn": "Ad (İngilizce)",
+      "nameAr": "Ad (Arapça)",
+      "nameTr": "Ad (Türkçe)",
+      "descriptionEn": "Açıklama (İngilizce)",
+      "descriptionAr": "Açıklama (Arapça)",
+      "descriptionTr": "Açıklama (Türkçe)",
+      "sortOrder": "Sıralama",
+      "category": "Kategori",
+      "price": "Taban fiyat",
+      "discountedPrice": "İndirimli fiyat (isteğe bağlı)",
+      "imageUrl": "Görsel URL'si",
+      "available": "Menüde mevcut",
+      "sizes": "Boyutlar",
+      "addSize": "Boyut ekle",
+      "sizeNameEn": "Boyut adı (İngilizce)",
+      "sizeNameAr": "Boyut adı (Arapça)",
+      "sizeNameTr": "Boyut adı (Türkçe)",
+      "priceModifier": "Fiyat farkı"
+    },
+    "tabs": {
+      "english": "İngilizce",
+      "arabic": "Arapça",
+      "turkish": "Türkçe"
+    }
+  }
+}

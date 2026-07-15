@@ -1,0 +1,88 @@
+{
+  "app": {
+    "name": "الطاولة المحلية"
+  },
+  "nav": {
+    "menu": "القائمة",
+    "admin": "الإدارة"
+  },
+  "theme": {
+    "label": "المظهر"
+  },
+  "language": {
+    "label": "اللغة"
+  },
+  "category": {
+    "all": "الكل"
+  },
+  "item": {
+    "addToOrder": "أضف إلى الطلب",
+    "selectSize": "اختر الحجم",
+    "quantity": "الكمية",
+    "off": "خصم",
+    "unavailable": "غير متوفر حاليًا"
+  },
+  "cart": {
+    "title": "طلبك",
+    "empty": "لم تتم إضافة أي عناصر بعد. اضغط على طبق لبدء طلبك.",
+    "subtotal": "المجموع",
+    "remove": "إزالة",
+    "reviewNote": "أظهر هذا للنادل لتقديم طلبك.",
+    "clear": "مسح الطلب"
+  },
+  "common": {
+    "loading": "جارٍ تحميل القائمة...",
+    "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "retry": "إعادة المحاولة",
+    "close": "إغلاق",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة"
+  },
+  "footer": {
+    "tagline": "مكونات طازجة، بعناية فائقة.",
+    "poweredBy": "قالب قائمة رقمية"
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "backToMenu": "عرض القائمة العامة",
+    "categoriesTab": "الأقسام",
+    "itemsTab": "عناصر القائمة",
+    "addCategory": "إضافة قسم",
+    "editCategory": "تعديل القسم",
+    "addItem": "إضافة عنصر",
+    "editItem": "تعديل العنصر",
+    "noCategories": "لا توجد أقسام بعد. أضف أول قسم للبدء.",
+    "noItems": "لا توجد عناصر بعد. أضف أول طبق للبدء.",
+    "confirmDeleteTitle": "هل تريد الحذف؟",
+    "confirmDeleteCategory": "سيتم حذف هذا القسم نهائيًا. لن تُحذف العناصر بداخله تلقائيًا.",
+    "confirmDeleteItem": "سيتم حذف هذا العنصر نهائيًا.",
+    "fields": {
+      "nameEn": "الاسم (إنجليزي)",
+      "nameAr": "الاسم (عربي)",
+      "nameTr": "الاسم (تركي)",
+      "descriptionEn": "الوصف (إنجليزي)",
+      "descriptionAr": "الوصف (عربي)",
+      "descriptionTr": "الوصف (تركي)",
+      "sortOrder": "ترتيب العرض",
+      "category": "القسم",
+      "price": "السعر الأساسي",
+      "discountedPrice": "السعر بعد الخصم (اختياري)",
+      "imageUrl": "رابط الصورة",
+      "available": "متوفر في القائمة",
+      "sizes": "الأحجام",
+      "addSize": "إضافة حجم",
+      "sizeNameEn": "اسم الحجم (إنجليزي)",
+      "sizeNameAr": "اسم الحجم (عربي)",
+      "sizeNameTr": "اسم الحجم (تركي)",
+      "priceModifier": "فرق السعر"
+    },
+    "tabs": {
+      "english": "الإنجليزية",
+      "arabic": "العربية",
+      "turkish": "التركية"
+    }
+  }
+}

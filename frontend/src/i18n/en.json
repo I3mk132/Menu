@@ -1,0 +1,88 @@
+{
+  "app": {
+    "name": "The Local Table"
+  },
+  "nav": {
+    "menu": "Menu",
+    "admin": "Admin"
+  },
+  "theme": {
+    "label": "Theme"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "category": {
+    "all": "All"
+  },
+  "item": {
+    "addToOrder": "Add to order",
+    "selectSize": "Choose a size",
+    "quantity": "Quantity",
+    "off": "OFF",
+    "unavailable": "Currently unavailable"
+  },
+  "cart": {
+    "title": "Your order",
+    "empty": "No items added yet. Tap a dish to start your order.",
+    "subtotal": "Subtotal",
+    "remove": "Remove",
+    "reviewNote": "Show this to your server to place your order.",
+    "clear": "Clear order"
+  },
+  "common": {
+    "loading": "Loading the menu...",
+    "error": "Something went wrong. Please try again.",
+    "retry": "Retry",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add"
+  },
+  "footer": {
+    "tagline": "Fresh ingredients, made with care.",
+    "poweredBy": "Digital menu template"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "backToMenu": "View public menu",
+    "categoriesTab": "Categories",
+    "itemsTab": "Menu items",
+    "addCategory": "Add category",
+    "editCategory": "Edit category",
+    "addItem": "Add menu item",
+    "editItem": "Edit menu item",
+    "noCategories": "No categories yet. Add your first one to get started.",
+    "noItems": "No menu items yet. Add your first dish to get started.",
+    "confirmDeleteTitle": "Delete this?",
+    "confirmDeleteCategory": "This will permanently delete this category. Items inside it will not be deleted automatically.",
+    "confirmDeleteItem": "This will permanently delete this menu item.",
+    "fields": {
+      "nameEn": "Name (English)",
+      "nameAr": "Name (Arabic)",
+      "nameTr": "Name (Turkish)",
+      "descriptionEn": "Description (English)",
+      "descriptionAr": "Description (Arabic)",
+      "descriptionTr": "Description (Turkish)",
+      "sortOrder": "Sort order",
+      "category": "Category",
+      "price": "Base price",
+      "discountedPrice": "Discounted price (optional)",
+      "imageUrl": "Image URL",
+      "available": "Available on the menu",
+      "sizes": "Sizes",
+      "addSize": "Add size",
+      "sizeNameEn": "Size name (English)",
+      "sizeNameAr": "Size name (Arabic)",
+      "sizeNameTr": "Size name (Turkish)",
+      "priceModifier": "Price modifier"
+    },
+    "tabs": {
+      "english": "English",
+      "arabic": "Arabic",
+      "turkish": "Turkish"
+    }
+  }
+}

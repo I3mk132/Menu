@@ -1,0 +1,59 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: menu_user
+      POSTGRES_PASSWORD: menu_password
+      POSTGRES_DB: menu_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U menu_user -d menu_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://menu_user:menu_password@db:5432/menu_db
+      TENANT_DEV_FALLBACK: ${TENANT_DEV_FALLBACK:-true}
+      PLATFORM_ADMIN_KEY: ${PLATFORM_ADMIN_KEY:-}
+      R2_ACCOUNT_ID: ${R2_ACCOUNT_ID:-}
+      R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-}
+      R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-}
+      R2_BUCKET_NAME: ${R2_BUCKET_NAME:-}
+      R2_PUBLIC_BASE_URL: ${R2_PUBLIC_BASE_URL:-}
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Browsers hit the API directly, so this must be an address
+        # reachable from the client's machine — not the Docker service
+        # name. Override in a .env file (VITE_API_URL=...) if the API
+        # will be reachable at a different host/port in production.
+        VITE_API_URL: ${VITE_API_URL:-http://localhost:8000}
+        # Only needed for local/demo use, where the browser is hitting
+        # "localhost" instead of a tenant's real domain — lets the
+        # frontend tell the backend which tenant to resolve via the
+        # X-Tenant-Slug header. Leave unset for real deployments, where
+        # each tenant's own domain resolves them automatically.
+        VITE_TENANT_SLUG: ${VITE_TENANT_SLUG:-local-table}
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+volumes:
+  db_data:
