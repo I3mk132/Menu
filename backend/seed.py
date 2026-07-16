@@ -20,6 +20,13 @@ from sqlmodel import Session, delete
 
 from app.database import engine, init_db
 from app.models import Tenant, Category, MenuItem
+from app.auth import hash_password
+
+# Demo /admin login password for BOTH seeded tenants. Every tenant has
+# its own password (Tenant.password_hash) — this constant just keeps
+# the demo simple. Change it (or set per-tenant passwords) for anything
+# beyond local development.
+DEMO_ADMIN_PASSWORD = "admin123"
 
 UNSPLASH = lambda photo_id: f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=800&q=80"
 
@@ -299,7 +306,7 @@ SUNSET_ITEMS = {
 
 
 def _seed_tenant(session, tenant_data, categories_def, items_by_key):
-    tenant = Tenant(**tenant_data)
+    tenant = Tenant(**tenant_data, password_hash=hash_password(DEMO_ADMIN_PASSWORD))
     session.add(tenant)
     session.commit()
     session.refresh(tenant)
@@ -345,6 +352,8 @@ def run():
         print()
         print("Test isolation locally with the X-Tenant-Slug header, e.g.:")
         print("  curl -H 'X-Tenant-Slug: sunset-diner' http://localhost:8000/api/v1/categories")
+        print()
+        print(f"/admin login password for both demo tenants: {DEMO_ADMIN_PASSWORD}")
 
 
 if __name__ == "__main__":

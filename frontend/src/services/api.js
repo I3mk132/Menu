@@ -17,6 +17,43 @@ export const api = axios.create({
   headers: tenantSlug ? { 'X-Tenant-Slug': tenantSlug } : {},
 })
 
+// ------------------------------------------------------------------- Auth
+// One admin token per browser, scoped to whichever tenant issued it
+// (the backend rejects a token that doesn't match the resolved tenant,
+// so there's no risk of it leaking across tenants even though the key
+// name below is shared).
+const TOKEN_KEY = 'admin_token'
+
+export const getAdminToken = () => localStorage.getItem(TOKEN_KEY)
+export const setAdminToken = (token) => localStorage.setItem(TOKEN_KEY, token)
+export const clearAdminToken = () => localStorage.removeItem(TOKEN_KEY)
+
+api.interceptors.request.use((config) => {
+  const token = getAdminToken()
+  if (token && config.url?.includes('/admin')) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+// Any 401 from an /admin call means the token is missing/expired/wrong
+// tenant — drop it so the UI falls back to the login screen.
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 && error.config?.url?.includes('/admin')) {
+      clearAdminToken()
+    }
+    return Promise.reject(error)
+  }
+)
+
+export const adminLogin = (password) =>
+  api.post('/api/v1/admin/auth/login', { password }).then((r) => {
+    setAdminToken(r.data.access_token)
+    return r.data
+  })
+
 // ---------------------------------------------------------------- Tenant
 export const getTenantConfig = () => api.get('/api/v1/tenant/config').then((r) => r.data)
 

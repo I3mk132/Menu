@@ -26,6 +26,7 @@ services:
       DATABASE_URL: postgresql+psycopg2://menu_user:menu_password@db:5432/menu_db
       TENANT_DEV_FALLBACK: ${TENANT_DEV_FALLBACK:-true}
       PLATFORM_ADMIN_KEY: ${PLATFORM_ADMIN_KEY:-}
+      JWT_SECRET: ${JWT_SECRET:-}
       R2_ACCOUNT_ID: ${R2_ACCOUNT_ID:-}
       R2_ACCESS_KEY_ID: ${R2_ACCESS_KEY_ID:-}
       R2_SECRET_ACCESS_KEY: ${R2_SECRET_ACCESS_KEY:-}

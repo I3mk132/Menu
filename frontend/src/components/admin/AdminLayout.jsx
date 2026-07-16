@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, LayoutGrid, UtensilsCrossed } from 'lucide-react'
+import { ArrowLeft, LayoutGrid, LogOut, UtensilsCrossed } from 'lucide-react'
 import LanguageSwitcher from '../common/LanguageSwitcher'
 import ThemeSelector from '../common/ThemeSelector'
 
-export default function AdminLayout({ activeTab, onTabChange, children }) {
+export default function AdminLayout({ activeTab, onTabChange, onLogout, children }) {
   const { t } = useTranslation()
 
   const tabs = [
@@ -31,6 +31,16 @@ export default function AdminLayout({ activeTab, onTabChange, children }) {
               <UtensilsCrossed size={14} />
               <span className="hidden sm:inline">{t('admin.backToMenu')}</span>
             </Link>
+            {onLogout && (
+              <button
+                type="button"
+                onClick={onLogout}
+                className="flex items-center gap-1.5 rounded-control border border-border px-3 py-2 text-sm text-text hover:border-primary"
+              >
+                <LogOut size={14} />
+                <span className="hidden sm:inline">{t('admin.login.logout')}</span>
+              </button>
+            )}
           </div>
         </div>
       </header>

@@ -83,6 +83,13 @@
       "english": "İngilizce",
       "arabic": "Arapça",
       "turkish": "Türkçe"
+    },
+    "login": {
+      "title": "Yönetici Girişi",
+      "passwordLabel": "Şifre",
+      "submit": "Giriş yap",
+      "error": "Şifre yanlış. Lütfen tekrar deneyin.",
+      "logout": "Çıkış yap"
     }
   }
 }

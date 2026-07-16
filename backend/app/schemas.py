@@ -47,7 +47,10 @@ class TenantBase(SQLModel):
 
 
 class TenantCreate(TenantBase):
-    pass
+    # Plaintext, write-only — hashed before storage and never echoed back
+    # (TenantRead has no password field at all). Required at creation so
+    # a tenant is never left without a way to log into its own /admin.
+    password: str
 
 
 class TenantUpdate(SQLModel):
@@ -55,6 +58,8 @@ class TenantUpdate(SQLModel):
     domain: Optional[str] = None
     name: Optional[str] = None
     description: Optional[str] = None
+    # Optional — set only when rotating a tenant's admin password.
+    password: Optional[str] = None
     logo_path: Optional[str] = None
     logo_url: Optional[str] = None
     favicon_path: Optional[str] = None
@@ -152,3 +157,15 @@ class MenuItemRead(MenuItemBase):
 class ImageUploadRead(SQLModel):
     path: str
     url: str
+
+
+# -------------------------------------------------------------------- Auth
+class AdminLoginRequest(SQLModel):
+    password: str
+
+
+class AdminLoginRead(SQLModel):
+    access_token: str
+    token_type: str = "bearer"
+    tenant_slug: str
+    tenant_name: str

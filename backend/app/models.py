@@ -41,6 +41,12 @@ class Tenant(SQLModel, table=True):
     primary_color: str = "#6F4E37"
     secondary_color: str = "#C08552"
 
+    # Bcrypt hash of this tenant's own /admin login password. Never
+    # serialized to the client (see TenantRead / TenantConfigRead in
+    # schemas.py, which both omit it). Nullable so a tenant with no
+    # password set simply can't log in until one is assigned.
+    password_hash: Optional[str] = None
+
     contact_email: str = ""
     contact_phone: str = ""
     address: str = ""

@@ -3,11 +3,15 @@ import { useTranslation } from 'react-i18next'
 import { Pencil, Trash2, Plus, RefreshCw } from 'lucide-react'
 
 import AdminLayout from '../components/admin/AdminLayout'
+import LoginPage from '../components/admin/LoginPage'
 import CategoryEditor from '../components/admin/CategoryEditor'
 import ItemEditor from '../components/admin/ItemEditor'
 import ConfirmDialog from '../components/admin/ConfirmDialog'
 import { localized, formatPrice } from '../utils/localize'
+import { useTenant } from '../context/TenantContext'
 import {
+  getAdminToken,
+  clearAdminToken,
   adminGetCategories,
   adminCreateCategory,
   adminUpdateCategory,
@@ -20,6 +24,8 @@ import {
 
 export default function AdminPage() {
   const { t, i18n } = useTranslation()
+  const { tenant } = useTenant()
+  const [authed, setAuthed] = useState(() => Boolean(getAdminToken()))
   const [activeTab, setActiveTab] = useState('categories')
   const [categories, setCategories] = useState([])
   const [items, setItems] = useState([])
@@ -38,13 +44,29 @@ export default function AdminPage() {
       setStatus('ready')
     } catch (err) {
       console.error(err)
-      setStatus('error')
+      // A 401 here means the token was missing/expired/wrong-tenant —
+      // the api.js interceptor already cleared it, so drop back to
+      // the login screen instead of showing a dead error state.
+      if (err.response?.status === 401) {
+        setAuthed(false)
+      } else {
+        setStatus('error')
+      }
     }
   }
 
   useEffect(() => {
-    load()
-  }, [])
+    if (authed) load()
+  }, [authed])
+
+  const handleLogout = () => {
+    clearAdminToken()
+    setAuthed(false)
+  }
+
+  if (!authed) {
+    return <LoginPage tenantName={tenant?.name} onSuccess={() => setAuthed(true)} />
+  }
 
   const saveCategory = async (data) => {
     if (data.id) {
@@ -80,7 +102,7 @@ export default function AdminPage() {
   const categoryName = (id) => categories.find((c) => c.id === id)?.name_en || '—'
 
   return (
-    <AdminLayout activeTab={activeTab} onTabChange={setActiveTab}>
+    <AdminLayout activeTab={activeTab} onTabChange={setActiveTab} onLogout={handleLogout}>
       {status === 'loading' && (
         <div className="flex items-center justify-center gap-2 py-16 text-textMuted">
           <RefreshCw className="animate-spin" size={18} />

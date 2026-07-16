@@ -27,6 +27,7 @@ session cookies — whatever fits) before shipping this to real users.
 """
 import os
 from fastapi import Depends, HTTPException, Request
+from fastapi import Header, status
 from sqlmodel import Session
 
 from app.database import get_session

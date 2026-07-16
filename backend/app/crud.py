@@ -15,6 +15,13 @@ from app.schemas import (
     CategoryCreate, CategoryUpdate,
     MenuItemCreate, MenuItemUpdate,
 )
+import bcrypt
+
+
+def _hash_password(password: str) -> str:
+    # Duplicated (rather than imported) from app.auth to avoid a circular
+    # import: app.auth -> app.dependencies -> app.crud.
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
 
 # ------------------------------------------------------------------ Tenant
@@ -39,7 +46,8 @@ def list_tenants(session: Session) -> List[Tenant]:
 
 
 def create_tenant(session: Session, data: TenantCreate) -> Tenant:
-    tenant = Tenant.model_validate(data)
+    payload = data.model_dump(exclude={"password"})
+    tenant = Tenant(**payload, password_hash=_hash_password(data.password))
     session.add(tenant)
     session.commit()
     session.refresh(tenant)
@@ -47,9 +55,11 @@ def create_tenant(session: Session, data: TenantCreate) -> Tenant:
 
 
 def update_tenant(session: Session, tenant: Tenant, data: TenantUpdate) -> Tenant:
-    updates = data.model_dump(exclude_unset=True)
+    updates = data.model_dump(exclude_unset=True, exclude={"password"})
     for key, value in updates.items():
         setattr(tenant, key, value)
+    if data.password:
+        tenant.password_hash = _hash_password(data.password)
     session.add(tenant)
     session.commit()
     session.refresh(tenant)

@@ -83,6 +83,13 @@
       "english": "English",
       "arabic": "Arabic",
       "turkish": "Turkish"
+    },
+    "login": {
+      "title": "Admin Login",
+      "passwordLabel": "Password",
+      "submit": "Log in",
+      "error": "Incorrect password. Please try again.",
+      "logout": "Log out"
     }
   }
 }

@@ -3,8 +3,11 @@ Per-tenant admin endpoints: full CRUD for categories and menu items,
 plus image uploads. Scoped by the same tenant-resolution dependency as
 the public menu router — the working assumption is that a tenant's own
 `/admin` is reached through that tenant's own domain (see the module
-docstring in app/dependencies.py). There is no authentication layer in
-this template; add one before shipping to real users.
+docstring in app/dependencies.py).
+
+Everything below `/auth/login` requires a valid bearer token for the
+resolved tenant (see app/auth.py::require_tenant_admin) — obtained by
+POSTing the tenant's admin password to `/auth/login` first.
 """
 from typing import List
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Query
@@ -15,20 +18,43 @@ from app.dependencies import get_current_tenant
 from app.models import Tenant
 from app import crud
 from app.services import storage
+from app.auth import require_tenant_admin, verify_password, create_token
 from app.schemas import (
     CategoryCreate, CategoryUpdate, CategoryRead,
     MenuItemCreate, MenuItemUpdate, MenuItemRead,
     ImageUploadRead,
+    AdminLoginRequest, AdminLoginRead,
 )
 
 router = APIRouter(prefix="/api/v1/admin", tags=["admin"])
+
+
+# -------------------------------------------------------------------- Auth
+@router.post("/auth/login", response_model=AdminLoginRead)
+def login(
+    data: AdminLoginRequest,
+    tenant: Tenant = Depends(get_current_tenant),
+):
+    """
+    Tenant is resolved the normal way (X-Tenant-Slug / Host header) —
+    the password only needs to be correct for *that* tenant, so the
+    same password can't be reused to log into a different tenant's
+    panel even if it happened to match.
+    """
+    if not verify_password(data.password, tenant.password_hash):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+    return AdminLoginRead(
+        access_token=create_token(tenant),
+        tenant_slug=tenant.slug,
+        tenant_name=tenant.name,
+    )
 
 
 # ---------------------------------------------------------------- Category
 @router.get("/categories", response_model=List[CategoryRead])
 def list_categories(
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     return crud.get_categories(session, tenant.id)
 
@@ -37,7 +63,7 @@ def list_categories(
 def create_category(
     data: CategoryCreate,
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     return crud.create_category(session, tenant.id, data)
 
@@ -47,7 +73,7 @@ def update_category(
     category_id: int,
     data: CategoryUpdate,
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     category = crud.get_category(session, tenant.id, category_id)
     if not category:
@@ -59,7 +85,7 @@ def update_category(
 def delete_category(
     category_id: int,
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     category = crud.get_category(session, tenant.id, category_id)
     if not category:
@@ -71,7 +97,7 @@ def delete_category(
 @router.get("/menu-items", response_model=List[MenuItemRead])
 def list_menu_items(
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     return crud.get_menu_items(session, tenant.id, include_unavailable=True)
 
@@ -80,7 +106,7 @@ def list_menu_items(
 def create_menu_item(
     data: MenuItemCreate,
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     category = crud.get_category(session, tenant.id, data.category_id)
     if not category:
@@ -93,7 +119,7 @@ def update_menu_item(
     item_id: int,
     data: MenuItemUpdate,
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     item = crud.get_menu_item(session, tenant.id, item_id)
     if not item:
@@ -113,7 +139,7 @@ def update_menu_item(
 def delete_menu_item(
     item_id: int,
     session: Session = Depends(get_session),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     item = crud.get_menu_item(session, tenant.id, item_id)
     if not item:
@@ -128,7 +154,7 @@ def delete_menu_item(
 async def upload_image(
     file: UploadFile = File(...),
     folder: str = Query("menu-items", pattern="^[a-z0-9-]+$"),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     """
     Uploads an image to this tenant's Cloudflare R2 prefix and returns
@@ -143,7 +169,7 @@ async def upload_image(
 @router.delete("/uploads", status_code=204)
 def delete_upload(
     path: str = Query(...),
-    tenant: Tenant = Depends(get_current_tenant),
+    tenant: Tenant = Depends(require_tenant_admin),
 ):
     if not path.startswith(f"tenants/{tenant.slug}/"):
         raise HTTPException(status_code=403, detail="Cannot delete another tenant's file")
