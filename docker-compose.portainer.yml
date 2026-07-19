@@ -18,11 +18,4 @@ services:
     # No published port — cloudflared reaches it over the internal
     # compose network. Nothing exposed on the host/firewall at all.
 
-  cloudflared:
-    image: cloudflare/cloudflared:latest
-    restart: unless-stopped
-    command: tunnel run
-    environment:
-      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?set TUNNEL_TOKEN from Cloudflare Zero Trust in Portainer stack env}
-    depends_on:
-      - backend
+
