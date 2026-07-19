@@ -17,5 +17,11 @@ services:
       R2_PUBLIC_BASE_URL: ${R2_PUBLIC_BASE_URL:?set R2_PUBLIC_BASE_URL in Portainer stack env}
     # No published port — cloudflared reaches it over the internal
     # compose network. Nothing exposed on the host/firewall at all.
+    networks:
+      - default
+      - edge
 
+networks:
+  edge:
+    external: true
 
