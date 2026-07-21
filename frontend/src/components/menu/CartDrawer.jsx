@@ -1,13 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Minus, Plus, Trash2, ShoppingBag } from 'lucide-react'
+import { X, Minus, Plus, Trash2, ShoppingBag, MessageCircle } from 'lucide-react'
 import { localized, formatPrice } from '../../utils/localize'
+import { buildWhatsappOrderUrl } from '../../utils/whatsappOrder'
 import { useCart } from '../../context/CartContext'
+import { useTenant } from '../../context/TenantContext'
 
 export default function CartDrawer() {
   const { t, i18n } = useTranslation()
+  const { tenant } = useTenant()
   const { lines, isOpen, setIsOpen, updateQuantity, removeLine, subtotal, clearCart, lineUnitPrice } =
     useCart()
+
+  const whatsappUrl = buildWhatsappOrderUrl(tenant, lines, subtotal, lineUnitPrice)
 
   return (
     <AnimatePresence>
@@ -123,6 +128,16 @@ export default function CartDrawer() {
                   </span>
                 </div>
                 <p className="mt-1 text-xs text-textMuted">{t('cart.reviewNote')}</p>
+                {whatsappUrl && (
+                  <button
+                    type="button"
+                    onClick={() => window.open(whatsappUrl, '_blank', 'noopener,noreferrer')}
+                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-control bg-primary py-2.5 text-sm font-medium text-white hover:bg-primaryHover"
+                  >
+                    <MessageCircle size={16} />
+                    {t('cart.orderWhatsapp')}
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={clearCart}

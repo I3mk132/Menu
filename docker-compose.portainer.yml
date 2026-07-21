@@ -5,6 +5,7 @@ services:
     build:
       context: ./backend
     restart: unless-stopped
+    container_name: menu-api
     environment:
       DATABASE_URL: ${DATABASE_URL:?set DATABASE_URL to your Neon connection string in Portainer stack env}
       TENANT_DEV_FALLBACK: ${TENANT_DEV_FALLBACK:-false}
@@ -16,4 +17,10 @@ services:
       R2_BUCKET_NAME: ${R2_BUCKET_NAME:?set R2_BUCKET_NAME in Portainer stack env}
       R2_PUBLIC_BASE_URL: ${R2_PUBLIC_BASE_URL:?set R2_PUBLIC_BASE_URL in Portainer stack env}
     
+    networks:
+      - default
+      - cf-tunnel-net
 
+networks:
+  cf-tunnel-net:
+    external: true

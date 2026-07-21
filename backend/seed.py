@@ -41,6 +41,8 @@ TENANTS = [
         contact_email="hello@localtable.example",
         contact_phone="+1 (555) 014-2200",
         address="128 Market Street, Springfield",
+        whatsapp_number="15550142200",
+        order_language="en",
     ),
     dict(
         slug="sunset-diner",
@@ -52,6 +54,8 @@ TENANTS = [
         contact_email="hello@sunsetdiner.example",
         contact_phone="+1 (555) 019-9081",
         address="44 Ocean Avenue, Bay City",
+        whatsapp_number="15550199081",
+        order_language="en",
     ),
 ]
 

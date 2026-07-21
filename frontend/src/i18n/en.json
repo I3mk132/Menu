@@ -28,6 +28,7 @@
     "subtotal": "Subtotal",
     "remove": "Remove",
     "reviewNote": "Show this to your server to place your order.",
+    "orderWhatsapp": "Order on WhatsApp",
     "clear": "Clear order"
   },
   "common": {
@@ -50,6 +51,7 @@
     "backToMenu": "View public menu",
     "categoriesTab": "Categories",
     "itemsTab": "Menu items",
+    "settingsTab": "Settings",
     "addCategory": "Add category",
     "editCategory": "Edit category",
     "addItem": "Add menu item",
@@ -83,6 +85,15 @@
       "english": "English",
       "arabic": "Arabic",
       "turkish": "Turkish"
+    },
+    "settings": {
+      "title": "WhatsApp ordering",
+      "description": "Let customers send their order to your WhatsApp from the cart.",
+      "whatsappNumber": "WhatsApp number",
+      "whatsappHint": "Country code + number, digits only. Leave empty to hide the button.",
+      "orderLanguage": "Order message language",
+      "orderLanguageHint": "The language order messages are written in, regardless of the customer's view.",
+      "saved": "Saved"
     },
     "login": {
       "title": "Admin Login",

@@ -27,6 +27,8 @@ class TenantConfigRead(SQLModel):
     contact_email: str
     contact_phone: str
     address: str
+    whatsapp_number: str
+    order_language: str
     gallery_images: List[Any] = []
 
 
@@ -42,6 +44,8 @@ class TenantBase(SQLModel):
     contact_email: str = ""
     contact_phone: str = ""
     address: str = ""
+    whatsapp_number: str = ""
+    order_language: str = "en"
     gallery_images: List[Any] = []
     is_active: bool = True
 
@@ -69,6 +73,8 @@ class TenantUpdate(SQLModel):
     contact_email: Optional[str] = None
     contact_phone: Optional[str] = None
     address: Optional[str] = None
+    whatsapp_number: Optional[str] = None
+    order_language: Optional[str] = None
     gallery_images: Optional[List[Any]] = None
     is_active: Optional[bool] = None
 
@@ -78,6 +84,19 @@ class TenantRead(TenantBase):
     logo_path: Optional[str] = None
     favicon_path: Optional[str] = None
     created_at: datetime
+
+
+class TenantSettingsRead(SQLModel):
+    """What a tenant admin sees/edits in its own /admin Settings tab.
+    Deliberately narrow — a tenant can only touch its ordering settings,
+    not branding, slug, domain, or password (those stay platform-side)."""
+    whatsapp_number: str
+    order_language: str
+
+
+class TenantSettingsUpdate(SQLModel):
+    whatsapp_number: Optional[str] = None
+    order_language: Optional[str] = None
 
 
 # ---------------------------------------------------------------- Category

@@ -28,6 +28,7 @@
     "subtotal": "Ara toplam",
     "remove": "Kaldır",
     "reviewNote": "Siparişinizi vermek için bunu garsona gösterin.",
+    "orderWhatsapp": "WhatsApp'tan sipariş ver",
     "clear": "Siparişi temizle"
   },
   "common": {
@@ -50,6 +51,7 @@
     "backToMenu": "Genel menüyü görüntüle",
     "categoriesTab": "Kategoriler",
     "itemsTab": "Menü öğeleri",
+    "settingsTab": "Ayarlar",
     "addCategory": "Kategori ekle",
     "editCategory": "Kategoriyi düzenle",
     "addItem": "Menü öğesi ekle",
@@ -83,6 +85,15 @@
       "english": "İngilizce",
       "arabic": "Arapça",
       "turkish": "Türkçe"
+    },
+    "settings": {
+      "title": "WhatsApp ile sipariş",
+      "description": "Müşterilerin sepetten siparişlerini WhatsApp'ınıza göndermesine izin verin.",
+      "whatsappNumber": "WhatsApp numarası",
+      "whatsappHint": "Ülke kodu + numara, yalnızca rakam. Butonu gizlemek için boş bırakın.",
+      "orderLanguage": "Sipariş mesajı dili",
+      "orderLanguageHint": "Müşterinin görüntüleme dilinden bağımsız olarak sipariş mesajlarının yazılacağı dil.",
+      "saved": "Kaydedildi"
     },
     "login": {
       "title": "Yönetici Girişi",

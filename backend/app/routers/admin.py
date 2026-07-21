@@ -24,9 +24,13 @@ from app.schemas import (
     MenuItemCreate, MenuItemUpdate, MenuItemRead,
     ImageUploadRead,
     AdminLoginRequest, AdminLoginRead,
+    TenantSettingsRead, TenantSettingsUpdate, TenantUpdate,
 )
 
 router = APIRouter(prefix="/api/v1/admin", tags=["admin"])
+
+# Languages a tenant may pick for its generated WhatsApp order message.
+ORDER_LANGUAGES = {"en", "ar", "tr"}
 
 
 # -------------------------------------------------------------------- Auth
@@ -47,6 +51,44 @@ def login(
         access_token=create_token(tenant),
         tenant_slug=tenant.slug,
         tenant_name=tenant.name,
+    )
+
+
+# ---------------------------------------------------------------- Settings
+@router.get("/settings", response_model=TenantSettingsRead)
+def get_settings(tenant: Tenant = Depends(require_tenant_admin)):
+    """This tenant's WhatsApp ordering settings."""
+    return TenantSettingsRead(
+        whatsapp_number=tenant.whatsapp_number,
+        order_language=tenant.order_language,
+    )
+
+
+@router.put("/settings", response_model=TenantSettingsRead)
+def update_settings(
+    data: TenantSettingsUpdate,
+    session: Session = Depends(get_session),
+    tenant: Tenant = Depends(require_tenant_admin),
+):
+    updates = TenantUpdate()
+
+    if data.order_language is not None:
+        if data.order_language not in ORDER_LANGUAGES:
+            raise HTTPException(
+                status_code=400,
+                detail=f"order_language must be one of {sorted(ORDER_LANGUAGES)}",
+            )
+        updates.order_language = data.order_language
+
+    if data.whatsapp_number is not None:
+        # Store digits only — the wa.me link needs a bare E.164 number,
+        # so strip +, spaces, dashes, parens the admin might type.
+        updates.whatsapp_number = "".join(c for c in data.whatsapp_number if c.isdigit())
+
+    tenant = crud.update_tenant(session, tenant, updates)
+    return TenantSettingsRead(
+        whatsapp_number=tenant.whatsapp_number,
+        order_language=tenant.order_language,
     )
 
 

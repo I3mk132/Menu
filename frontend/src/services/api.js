@@ -71,6 +71,11 @@ export const adminCreateCategory = (data) => api.post('/api/v1/admin/categories'
 export const adminUpdateCategory = (id, data) => api.put(`/api/v1/admin/categories/${id}`, data).then((r) => r.data)
 export const adminDeleteCategory = (id) => api.delete(`/api/v1/admin/categories/${id}`)
 
+// Tenant self-service ordering settings (whatsapp_number, order_language).
+// Gated by require_tenant_admin; a tenant admin can't touch branding/slug.
+export const adminGetSettings = () => api.get('/api/v1/admin/settings').then((r) => r.data)
+export const adminUpdateSettings = (data) => api.put('/api/v1/admin/settings', data).then((r) => r.data)
+
 export const adminGetMenuItems = () => api.get('/api/v1/admin/menu-items').then((r) => r.data)
 export const adminCreateMenuItem = (data) => api.post('/api/v1/admin/menu-items', data).then((r) => r.data)
 export const adminUpdateMenuItem = (id, data) => api.put(`/api/v1/admin/menu-items/${id}`, data).then((r) => r.data)

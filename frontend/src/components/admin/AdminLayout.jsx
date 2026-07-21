@@ -10,6 +10,7 @@ export default function AdminLayout({ activeTab, onTabChange, onLogout, children
   const tabs = [
     { id: 'categories', label: t('admin.categoriesTab') },
     { id: 'items', label: t('admin.itemsTab') },
+    { id: 'settings', label: t('admin.settingsTab') },
   ]
 
   return (

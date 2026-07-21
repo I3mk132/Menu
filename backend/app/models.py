@@ -51,6 +51,14 @@ class Tenant(SQLModel, table=True):
     contact_phone: str = ""
     address: str = ""
 
+    # WhatsApp ordering: number in E.164 digits (no +, no spaces), e.g.
+    # "905551234567". Empty = feature off (frontend hides the button).
+    whatsapp_number: str = ""
+    # Language of the generated WhatsApp order message, chosen by the
+    # tenant admin. One of: "en" | "ar" | "tr". Independent of the
+    # customer's current menu view language.
+    order_language: str = "en"
+
     # [{"path": "tenants/menua/gallery/xyz.jpg", "url": "https://..."}, ...]
     gallery_images: List[Any] = Field(default_factory=list, sa_column=Column(JSON))
 

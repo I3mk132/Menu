@@ -6,6 +6,7 @@ import AdminLayout from '../components/admin/AdminLayout'
 import LoginPage from '../components/admin/LoginPage'
 import CategoryEditor from '../components/admin/CategoryEditor'
 import ItemEditor from '../components/admin/ItemEditor'
+import SettingsEditor from '../components/admin/SettingsEditor'
 import ConfirmDialog from '../components/admin/ConfirmDialog'
 import { localized, formatPrice } from '../utils/localize'
 import { useTenant } from '../context/TenantContext'
@@ -103,12 +104,14 @@ export default function AdminPage() {
 
   return (
     <AdminLayout activeTab={activeTab} onTabChange={setActiveTab} onLogout={handleLogout}>
-      {status === 'loading' && (
+      {status === 'loading' && activeTab !== 'settings' && (
         <div className="flex items-center justify-center gap-2 py-16 text-textMuted">
           <RefreshCw className="animate-spin" size={18} />
           <span className="text-sm">{t('common.loading')}</span>
         </div>
       )}
+
+      {activeTab === 'settings' && <SettingsEditor />}
 
       {status === 'ready' && activeTab === 'categories' && (
         <div>
