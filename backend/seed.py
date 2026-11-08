@@ -78,7 +78,7 @@ ITEMS = {
             description_ar="حمص كريمي مع الطحينة والليمون وزيت الزيتون.",
             description_tr="Tahin, limon ve zeytinyağı ile kremsi nohut ezmesi.",
             price=6.5, discounted_price=None,
-            image_url=UNSPLASH("photo-1622973536968-3ead9e780960"),
+            image_url=UNSPLASH("photo-1697126248475-a537cc5cce28"),
         ),
         dict(
             name_en="Stuffed Grape Leaves", name_ar="ورق عنب محشي", name_tr="Yaprak Sarma",
@@ -86,7 +86,7 @@ ITEMS = {
             description_ar="ورق عنب محشو بالأرز والأعشاب مع دبس الرمان.",
             description_tr="Pirinç ve otlarla doldurulmuş, nar ekşili asma yaprakları.",
             price=7.0, discounted_price=None,
-            image_url=UNSPLASH("photo-1600335895229-6e75511892c8"),
+            image_url=UNSPLASH("photo-1786174045070-be6a0da3a39d"),
         ),
         dict(
             name_en="Crispy Calamari", name_ar="كاليماري مقرمش", name_tr="Çıtır Kalamar",
@@ -94,7 +94,7 @@ ITEMS = {
             description_ar="حلقات كاليماري مقلية بخفة مع صلصة الليمون.",
             description_tr="Hafif harçla kızartılmış kalamar halkaları, limonlu sos ile.",
             price=9.5, discounted_price=7.5,
-            image_url=UNSPLASH("photo-1599487488170-d11ec9c172f0"),
+            image_url=UNSPLASH("photo-1682264895449-f75b342cbab6"),
         ),
         dict(
             name_en="Garlic Cheese Bread", name_ar="خبز بالثوم والجبن", name_tr="Sarımsaklı Peynirli Ekmek",
@@ -102,7 +102,7 @@ ITEMS = {
             description_ar="خبز مخبوز بزبدة الثوم وجبنة الموزاريلا الذائبة.",
             description_tr="Sarımsak tereyağı ve eritilmiş mozzarella ile fırınlanmış pide.",
             price=5.5, discounted_price=None,
-            image_url=UNSPLASH("photo-1573140247632-f8fd74997d5c"),
+            image_url=UNSPLASH("photo-1619535860434-ba1d8fa12536"),
         ),
     ],
     "western": [
@@ -141,7 +141,7 @@ ITEMS = {
             description_ar="ستيك ريب آي 280 غرام مشوي حسب الطلب مع خضار مشوية.",
             description_tr="İsteğe göre pişirilmiş 280 gr antrikot, közlenmiş sebzelerle servis edilir.",
             price=24.0, discounted_price=None,
-            image_url=UNSPLASH("photo-1504674900247-0877df9cc836"),
+            image_url=UNSPLASH("photo-1588168333986-5078d3ae3976"),
         ),
     ],
     "eastern": [
@@ -151,7 +151,7 @@ ITEMS = {
             description_ar="دجاج متبل ومشوي على السيخ مع الأرز والسلطة وصلصة الثوم.",
             description_tr="Şişten kesilen marine tavuk, pilav, salata ve sarımsak sos ile.",
             price=10.5, discounted_price=None,
-            image_url=UNSPLASH("photo-1633436375153-d7045cb93e38"),
+            image_url=UNSPLASH("photo-1670165088604-5a39f5c1be51"),
         ),
         dict(
             name_en="Lamb Kebab Skewers", name_ar="كباب لحم غنم", name_tr="Kuzu Şiş Kebap",
@@ -159,7 +159,7 @@ ITEMS = {
             description_ar="أسياخ كباب لحم غنم مشوية على الفحم مع بصل السماق والطماطم المشوية.",
             description_tr="Közde pişirilmiş kuzu şiş kebap, sumaklı soğan ve közlenmiş domates ile.",
             price=15.0, discounted_price=None,
-            image_url=UNSPLASH("photo-1529193591184-b1d58069ecdd"),
+            image_url=UNSPLASH("photo-1771285119408-04cca3b35036"),
         ),
         dict(
             name_en="Mixed Grill Platter", name_ar="مشاوي مشكلة", name_tr="Karışık Izgara Tabağı",
@@ -167,7 +167,7 @@ ITEMS = {
             description_ar="تشكيلة الشيف من الكباب وشيش طاووق والكفتة مع الأرز والخضار المشوية.",
             description_tr="Şefin seçtiği kebap, şiş tavuk ve köfte, pilav ve közlenmiş sebzeler eşliğinde.",
             price=22.0, discounted_price=18.0,
-            image_url=UNSPLASH("photo-1544025162-d76694265947"),
+            image_url=UNSPLASH("photo-1771285119318-b342c3ecc51c"),
         ),
         dict(
             name_en="Falafel Wrap", name_ar="لفافة فلافل", name_tr="Falafel Dürüm",
@@ -175,7 +175,7 @@ ITEMS = {
             description_ar="فلافل مقرمشة مع المخللات وصلصة الطحينة ملفوفة بخبز دافئ.",
             description_tr="Çıtır falafel, turşu ve tahin sos, sıcak lavaş içinde dürülmüş.",
             price=7.5, discounted_price=None,
-            image_url=UNSPLASH("photo-1601050690597-df0568f70950"),
+            image_url=UNSPLASH("photo-1748955308143-5055af50bba6"),
         ),
     ],
     "drinks": [
@@ -213,7 +213,7 @@ ITEMS = {
             description_ar="مياه معدنية غازية باردة تقدم مع شريحة ليمون.",
             description_tr="Soğutulmuş maden sodası, bir dilim misket limonu ile.",
             price=2.5, discounted_price=None,
-            image_url=UNSPLASH("photo-1560023907-5f339617ea30"),
+            image_url=UNSPLASH("photo-1548839140-29a749e1cf4d"),
         ),
     ],
     "desserts": [
@@ -223,7 +223,7 @@ ITEMS = {
             description_ar="طبقات من العجين المقرمش والفستق وشراب العسل مقطعة يدويًا.",
             description_tr="Çıtır yufka, fıstık ve bal şerbeti katmanları, elle kesilmiş baklava dilimleri.",
             price=6.0, discounted_price=None,
-            image_url=UNSPLASH("photo-1571115177098-24ec42ed204d"),
+            image_url=UNSPLASH("photo-1598110750624-207050c4f28c"),
         ),
         dict(
             name_en="Kunafa with Pistachio", name_ar="كنافة بالفستق", name_tr="Fıstıklı Künefe",
@@ -231,7 +231,7 @@ ITEMS = {
             description_ar="كنافة دافئة محشوة بالجبنة الحلوة ومغطاة بالفستق المطحون.",
             description_tr="Tatlı peynir dolgulu sıcak tel kadayıf, üzeri dövülmüş fıstıklı.",
             price=7.5, discounted_price=6.0,
-            image_url=UNSPLASH("photo-1519676867240-f03562e64548"),
+            image_url=UNSPLASH("photo-1778447812923-88a9e3e6b567"),
         ),
         dict(
             name_en="Chocolate Lava Cake", name_ar="كيك الشوكولاتة الذائبة", name_tr="Sıcak Çikolatalı Sufle",
@@ -305,7 +305,7 @@ SUNSET_ITEMS = {
             description_ar="مشروب غازي كلاسيكي بارد مع إعادة تعبئة مجانية.",
             description_tr="Buz gibi soğuk, ücretsiz doldurmalı klasik gazoz.",
             price=2.5, discounted_price=None,
-            image_url=UNSPLASH("photo-1543253687-c931c8e01820"),
+            image_url=UNSPLASH("photo-1636144832475-0d81f893354d"),
         ),
     ],
 }

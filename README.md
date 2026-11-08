@@ -2,8 +2,7 @@
 
 A multi-tenant digital menu platform for restaurants and cafes. One backend and one frontend build serve any number of restaurants. Each restaurant has its own domain, branding, menu, and admin panel. Customers browse the menu in **English, Arabic (RTL), or Turkish**, add items to a cart, and send the order to the restaurant on **WhatsApp** in one tap.
 
-<!-- Screenshots: add images to docs/screenshots/ and they will render below -->
-| Menu | Cart & WhatsApp order | Admin panel |
+| Menu (English) | Cart & WhatsApp order | Admin panel (Arabic, RTL) |
 |---|---|---|
 | ![Menu](docs/screenshots/menu.png) | ![Cart](docs/screenshots/cart.png) | ![Admin](docs/screenshots/admin.png) |
 
