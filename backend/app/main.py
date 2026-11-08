@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,14 +12,17 @@ app = FastAPI(
     version="2.0.0",
 )
 
-# Wide-open CORS by default since tenants can be on arbitrary custom
-# domains and we can't know them ahead of time in a template. Consider
-# validating Origin against the resolved tenant's `domain` field instead
-# of "*" once you have a real list of tenants to check against.
+# Tenants live on arbitrary custom domains, so origins default to "*".
+# Restrict them with CORS_ORIGINS (comma-separated) once the tenant
+# domains are known. Credentials stay disabled: admin auth is a Bearer
+# token in the Authorization header, never a cookie, so the browser has
+# no ambient credentials for a foreign origin to ride on.
+CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "*").split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )

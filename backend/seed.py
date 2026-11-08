@@ -16,6 +16,8 @@ NOTE: image_url values point at Unsplash demo photography. Swap these
 for the client's own photos (ideally uploaded through the admin panel,
 which stores them in Cloudflare R2) before a real deployment.
 """
+import os
+
 from sqlmodel import Session, delete
 
 from app.database import engine, init_db
@@ -26,7 +28,7 @@ from app.auth import hash_password
 # its own password (Tenant.password_hash) — this constant just keeps
 # the demo simple. Change it (or set per-tenant passwords) for anything
 # beyond local development.
-DEMO_ADMIN_PASSWORD = "admin123"
+DEMO_ADMIN_PASSWORD = os.getenv("DEMO_ADMIN_PASSWORD", "admin123")
 
 UNSPLASH = lambda photo_id: f"https://images.unsplash.com/{photo_id}?auto=format&fit=crop&w=800&q=80"
 
